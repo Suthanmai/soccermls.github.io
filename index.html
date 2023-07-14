@@ -10,6 +10,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .tab {
@@ -17,6 +18,7 @@
       background-color: #f2f2f2;
       border: 1px solid #ccc;
       cursor: pointer;
+      flex: 1 1 50%; /* Display tabs in two columns */
     }
 
     .tab.active {
@@ -33,10 +35,15 @@
       display: block;
     }
 
+    /* Post styles */
+    .tab-content ul {
+      margin-bottom: 10px; /* Add more space between each post */
+    }
+
     /* Responsive styles */
     @media (max-width: 480px) {
-      .tab-container {
-        flex-direction: column;
+      .tab {
+        flex: 1 1 100%; /* Display tabs in a single column on mobile devices */
       }
     }
   </style>
