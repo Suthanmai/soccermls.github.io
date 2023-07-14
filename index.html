@@ -67,19 +67,37 @@
   <script src="https://unpkg.com/he/he.js"></script>
   <script>
     async function scrapeReddit(subreddit, postsListId) {
-      // The rest of the JavaScript code remains the same...
+      // The scraping code remains the same...
     }
 
     function modifyTitleWithBoldWords(title, boldWords, exchangeRates) {
-      // The rest of the JavaScript code remains the same...
+      // The modification code remains the same...
     }
 
     function updatePostColors() {
-      // The rest of the JavaScript code remains the same...
+      // The post color update code remains the same...
     }
 
     function switchTab(tabIndex) {
-      // The rest of the JavaScript code remains the same...
+      const tabs = document.getElementsByClassName('tab');
+      const tabContents = document.getElementsByClassName('tab-content');
+
+      // Remove active class from all tabs and tab contents
+      Array.from(tabs).forEach((tab) => tab.classList.remove('active'));
+      Array.from(tabContents).forEach((content) => content.classList.remove('active'));
+
+      // Add active class to the selected tab and tab content
+      tabs[tabIndex].classList.add('active');
+      tabContents[tabIndex].classList.add('active');
+
+      // Fetch data for the selected subreddit if not loaded already
+      const postsList = document.getElementById(tabIndex === 0 ? 'soccer-posts-list' : 'mls-posts-list');
+      if (postsList.childElementCount === 0) {
+        const subreddit = tabIndex === 0 ? 'soccer' : 'MLS';
+        scrapeReddit(subreddit, postsList.id);
+      }
+
+      updatePostColors();
     }
 
     // Call the scraping function for the initial tab
@@ -87,7 +105,10 @@
 
     // Update every 5 minutes (300000 milliseconds)
     setInterval(() => {
-      // The rest of the JavaScript code remains the same...
+      const activeTabIndex = Array.from(document.getElementsByClassName('tab')).findIndex((tab) =>
+        tab.classList.contains('active')
+      );
+      switchTab(activeTabIndex);
     }, 300000);
   </script>
 </body>
